@@ -7,7 +7,7 @@ EAPI="4"
 # needed by make_desktop_entry
 inherit eutils
 
-MY_PN="Sublime%20Text%202%20Build"
+MY_PN="Sublime%20Text"
 MY_P="${MY_PN}%20${PV}"
 S="${WORKDIR}/Sublime Text 2"
 
@@ -17,7 +17,7 @@ COMMON_URI="http://c758482.r82.cf2.rackcdn.com"
 SRC_URI="amd64? ( ${COMMON_URI}/${MY_P}%20x64.tar.bz2 )
 	x86? ( ${COMMON_URI}/${MY_P}.tar.bz2 )"
 LICENSE="Sublime"
-SLOT="0"
+SLOT="2"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
@@ -35,5 +35,5 @@ src_install() {
 	doins "PackageSetup.py"
 	doexe "sublime_text"
 	dosym "/opt/${PN}/sublime_text" /usr/bin/subl
-	make_desktop_entry "subl" "Sublime Text Editor" "accessories-text-editor" "Application;TextEditor"
+	make_desktop_entry "subl" "Sublime Text Editor" "accessories-text-editor" "TextEditor"
 }
