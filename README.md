@@ -1,4 +1,0 @@
-OhtarGentoo
-===========
-
-gentoo overlay
