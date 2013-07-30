@@ -1,0 +1,10 @@
+# ChangeLog for app-editors/sublime-text
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*sublime-text-2.0.1 (30 Jul 2013)
+
+  30 Jul 2013; Constantine E. Kozlov <tempor.demonius@gmail.com>
+  +sublime-text-2.0.1.ebuild:
+  Version bump: Added 2.0.1 version
+
