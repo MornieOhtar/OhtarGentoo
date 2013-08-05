@@ -22,7 +22,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="media-libs/libpng:1.2
+RDEPEND="media-libs/libpng:0
 	>=x11-libs/gtk+-2.24.8-r1:2"
 
 src_install() {
