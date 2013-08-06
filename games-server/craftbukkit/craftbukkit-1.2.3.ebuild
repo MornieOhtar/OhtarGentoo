@@ -16,7 +16,7 @@ SRC_URI="https://github.com/Bukkit/CraftBukkit/tarball/${CB_PV} -> ${P}.tar.gz
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="ipv6"
+IUSE="ipv6 -systemd"
 RESTRICT="test" # Needs hamcrest-1.2?
 
 CDEPEND="dev-java/commons-lang:2.1
@@ -34,15 +34,22 @@ DEPEND="${CDEPEND}
 #	test? ( dev-java/hamcrest
 #		dev-java/junit:4 )"
 
+#Starting at app-misc/tmux goes minecraft-common dependencies
 RDEPEND="${CDEPEND}
 	>=virtual/jre-1.6
-	games-server/minecraft-common"
+	app-misc/tmux
+	!systemd? ( >=sys-apps/openrc-0.3.0 )
+	!!=games-server/minecraft-server-201*"
 
 S="${WORKDIR}/${P}"
 
 JAVA_GENTOO_CLASSPATH="bukkit,commons-lang-2.1,ebean,gson-2.2.2,guava-10,jansi,jline-2,jopt-simple,snakeyaml"
 JAVA_CLASSPATH_EXTRA="${DISTDIR}/${MC_JAR}"
 JAVA_SRC_DIR="src/main/java"
+
+# Again... minecraft common variables
+DIR="/var/lib/minecraft"
+PID="/var/run/minecraft"
 
 src_unpack() {
 	A="${P}.tar.gz" vcs-snapshot_src_unpack
@@ -60,8 +67,17 @@ java_prepare() {
 
 	echo "Implementation-Version: Gentoo-${PVR}" > target/classes/META-INF/MANIFEST.MF || die
 	cp -r src/main/resources/* target/classes || die
-}
 
+	# minecraft-commons scripts install
+	cp "${FILESDIR}"/{init,console}.sh . || die
+	sed -i "s/@GAMES_USER_DED@/${GAMES_USER_DED}/g" init.sh || die
+	sed -i "s/@GAMES_GROUP@/${GAMES_GROUP}/g" console.sh || die
+}
+src_compile() {
+	if use systemd; then
+		die "systemd is not yet supported"
+	fi
+}
 src_install() {
 	local ARGS
 	use ipv6 || ARGS="-Djava.net.preferIPv4Stack=true"
@@ -72,6 +88,16 @@ src_install() {
 
 	dosym minecraft-server "/etc/init.d/${PN}"
 	dodoc README.md
+
+	# minecraft-commons scripts install
+
+	diropts -o "${GAMES_USER_DED}" -g "${GAMES_GROUP}"
+	keepdir "${DIR}" "${PID}"
+	gamesperms "${D}${DIR}" "${D}${PID}"
+
+	newinitd init.sh minecraft-server
+	newgamesbin console.sh minecraft-server-console
+	systemd_dotmpfilesd "${FILESDIR}/minecraft.tmpfilesd minecraft.conf"
 
 	prepgamesdirs
 }
