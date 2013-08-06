@@ -3,6 +3,7 @@
 # $Header: $
 
 EAPI=4
+CB_PV="${PV}-R0.2"
 MC_PN="minecraft-server-unobfuscated"
 MC_JAR="${MC_PN}-${PV}.jar"
 
@@ -10,7 +11,7 @@ inherit games vcs-snapshot java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Bukkit implementation for the official Minecraft server"
 HOMEPAGE="http://bukkit.org"
-SRC_URI="https://github.com/Bukkit/CraftBukkit/tarball/master -> ${P}.tar.gz
+SRC_URI="https://github.com/Bukkit/CraftBukkit/tarball/${CB_PV} -> ${P}.tar.gz
 	http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/${PV}/minecraft-server-${PV}.jar -> ${MC_JAR}"
 LICENSE="GPL-3"
 SLOT="0"
