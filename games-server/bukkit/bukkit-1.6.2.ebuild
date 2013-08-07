@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=4
-MY_PV="1.4.7-R0.1"
+MY_PV="${PV}-R0.1"
 JAVA_PKG_IUSE="doc source"
 
 inherit games vcs-snapshot java-pkg-2 java-pkg-simple
