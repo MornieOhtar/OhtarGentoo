@@ -1,0 +1,10 @@
+# ChangeLog for dev-dotnet/gstreamer-sharp
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*gstreamer-sharp-0.99.0 (24 Apr 2014)
+
+  24 Apr 2014; Constantine Kozlov <tempos@gentoo.org>
+  +gstreamer-sharp-0.99.0.ebuild:
+  Initial upload.
+
