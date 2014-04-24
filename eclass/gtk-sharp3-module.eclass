@@ -86,46 +86,48 @@ add_depend() {
 case ${GTK_SHARP_MODULE} in
 	glib|glade|gtk|gdk|atk|pango|gtk-dotnet|gtk-gapi|gtk-docs)
 		TARBALL="gtk-sharp"
-		case ${PVR} in
-			2.12.*)
-				SRC_URI="mirror://gentoo/${TARBALL}-2.12.7.patch.bz2"
-				#Upstream: https://bugzilla.novell.com/show_bug.cgi?id=$bugno
-				#Upstream bug #470390 for the gtk-sharp-2.12.7.patch
-				PATCHES=(
-					"${WORKDIR}/${TARBALL}-2.12.7.patch"
-				)
-				EAUTORECONF="YES"
-				add_bdepend "=sys-devel/automake-1.10*"
-				add_bdepend ">=sys-devel/autoconf-2.61"
-				;;
-		esac
+#		case ${PVR} in
+#			2.12.*)
+#				SRC_URI="mirror://gentoo/${TARBALL}-2.12.7.patch.bz2"
+#				#Upstream: https://bugzilla.novell.com/show_bug.cgi?id=$bugno
+#				#Upstream bug #470390 for the gtk-sharp-2.12.7.patch
+#				PATCHES=(
+#					"${WORKDIR}/${TARBALL}-2.12.7.patch"
+#				)
+#				EAUTORECONF="YES"
+#				add_bdepend "=sys-devel/automake-1.10*"
+#				add_bdepend ">=sys-devel/autoconf-2.61"
+#				;;
+#		esac
+		add_bdepend "=sys-devel/automake-1.10*"
+		add_bdepend ">=sys-devel/autoconf-2.61"
 		;;
 	art|gnome|gnomevfs|gconf)
 		TARBALL="gnome-sharp"
-#		add_depend "=dev-dotnet/gtk-sharp-${GTK_SHARP_REQUIRED_VERSION}*"
+		add_depend "=dev-dotnet/gtk-sharp-${GTK_SHARP_REQUIRED_VERSION}*"
 		has "${GTK_SHARP_MODULE}" "${gapi_users_list}" && \
 			add_bdepend "=dev-dotnet/gtk-sharp-gapi-${GTK_SHARP_REQUIRED_VERSION}*"
-		case ${PVR} in
-			2.24.1*)
-				SRC_URI="mirror://gentoo/${TARBALL}-2.24.1.patch.bz2"
-				# Upstream bug: https://bugzilla.novell.com/show_bug.cgi?id=483251
-				PATCHES=(
-					"${WORKDIR}/${TARBALL}-2.24.1.patch"
-				)
-				EAUTORECONF="YES"
-				add_bdepend "=sys-devel/automake-1.10*"
-				add_bdepend ">=sys-devel/autoconf-2.61"
-				;;
-			2.24.2*)
-				add_depend ">=dev-lang/mono-2.7"
-				;;
-		esac
+#		case ${PVR} in
+#			2.24.1*)
+#				SRC_URI="mirror://gentoo/${TARBALL}-2.24.1.patch.bz2"
+#				# Upstream bug: https://bugzilla.novell.com/show_bug.cgi?id=483251
+#				PATCHES=(
+#					"${WORKDIR}/${TARBALL}-2.24.1.patch"
+#				)
+#				EAUTORECONF="YES"
+#				add_bdepend "=sys-devel/automake-1.10*"
+#				add_bdepend ">=sys-devel/autoconf-2.61"
+#				;;
+#			2.24.2*)
+#				add_depend ">=dev-lang/mono-2.7"
+#				;;
+#		esac
 		;;
 	gnome-desktop|gnome-print|gnome-panel|gtkhtml|gtksourceview|nautilusburn|rsvg|vte|wnck)
 		TARBALL="gnome-desktop-sharp"
 		add_depend "=dev-dotnet/gtk-sharp-${GTK_SHARP_REQUIRED_VERSION}*"
 		add_depend "=dev-dotnet/gnome-sharp-2.24*"
-		add_depend "gnome-base/gnome-desktop:2"
+		add_depend "gnome-base/gnome-desktop:3"
 		add_bdepend "=dev-dotnet/gtk-sharp-gapi-${GTK_SHARP_REQUIRED_VERSION}*"
 		;;
 	*)
@@ -140,7 +142,7 @@ case ${PF} in
 		add_depend ">=dev-lang/mono-2.0"
 		;;
 	gtk-sharp-gapi*)
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
 		add_depend "dev-perl/XML-LibXML"
 		;;
 	gtk-sharp-*)
@@ -153,25 +155,25 @@ case ${PF} in
 	gdk-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
-		add_depend "x11-libs/gtk+:2"
 		add_depend "~dev-dotnet/pango-sharp-${PV}"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		add_depend "x11-libs/gtk+:3"
+		add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
 		;;
 	atk-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
 		add_depend "dev-libs/atk"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
 		;;
 	glib-sharp-*)
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
 		add_depend "dev-libs/glib:2"
 		;;
 	pango-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
 		add_depend "x11-libs/pango"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
 		;;
 	gtk-dotnet-*)
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
@@ -179,7 +181,7 @@ case ${PF} in
 		add_depend "~dev-dotnet/pango-sharp-${PV}"
 		add_depend "~dev-dotnet/gtk-sharp-${PV}"
 		add_depend "dev-lang/mono[-minimal]"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
 		;;
 	glade-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
@@ -195,11 +197,11 @@ case ${PF} in
 		add_depend ">=media-libs/libart_lgpl-2.3.20"
 		;;
 	gnome-sharp-*)
-		add_depend ">=gnome-base/libgnomeui-${PV_MAJOR}"
+		add_depend ">=gnome-base/libgnomeui-2.24"
 		add_depend "~dev-dotnet/gnomevfs-sharp-${PV}"
 		add_depend "~dev-dotnet/art-sharp-${PV}"
 		add_depend ">=gnome-base/libgnomecanvas-${GNOMECANVAS_REQUIRED_VERSION}"
-		add_depend ">=x11-libs/gtk+-2.14.0:2"
+		add_depend ">=x11-libs/gtk+-3.4.4:3"
 		;;
 	gconf-sharp-*)
 		add_depend ">=gnome-base/gconf-${PV_MAJOR}:2"
@@ -276,7 +278,7 @@ S="${WORKDIR}/${TARBALL}-${PV}"
 # @DESCRIPTION:
 # Default value: mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.bz2
 SRC_URI="${SRC_URI}
-	mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.bz2"
+	mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.xz"
 
 # @FUNCTION: get_sharp_apis
 # @USAGE: <type> <pkgconfig-package>
@@ -418,22 +420,22 @@ pkg_check_modules_override() {
 # Runs a M-m-m-monster sed on GTK_SHARP_MODULE_DIR to convert references to
 # local assemblies to the installed ones. Is only called by src_prepare when
 # $GTK_SHARP_MODULE is a member of $gtk_sharp_module_list.
-gtk-sharp-tarball-post_src_prepare() {
+gtk-sharp3-tarball-post_src_prepare() {
 	has "${EAPI:-0}" 2 && ! use prefix && EPREFIX=
 	cd "${S}/${GTK_SHARP_MODULE_DIR}"
 	sed -i \
-		-e "s; \$(srcdir)/../glib/glib-api.xml; $(get_sharp_apis --bare glib-sharp-2.0);"			\
-		-e "s; ../pango/pango-api.xml; $(get_sharp_apis --bare pango-sharp-2.0);"				\
-		-e "s; ../atk/atk-api.xml; $(get_sharp_apis --bare atk-sharp-2.0);"					\
-		-e "s; ../gdk/gdk-api.xml; $(get_sharp_apis --bare gdk-sharp-2.0);"					\
-		-e "s; ../gtk/gtk-api.xml; $(get_sharp_apis --bare gtk-sharp-2.0);"					\
-		-e "s; \.\./glib/glib-sharp.dll; $(get_sharp_assemblies --bare glib-sharp-2.0);g"			\
-		-e "s; \.\./pango/pango-sharp.dll; $(get_sharp_assemblies --bare pango-sharp-2.0);g"			\
-		-e "s; \.\./atk/atk-sharp.dll; $(get_sharp_assemblies --bare atk-sharp-2.0);g"				\
-		-e "s; \.\./gdk/gdk-sharp.dll; $(get_sharp_assemblies --bare gdk-sharp-2.0);g"				\
-		-e "s; \.\./gtk/gtk-sharp.dll; $(get_sharp_assemblies --bare gtk-sharp-2.0);g"				\
-		-e "s;\$(RUNTIME) \$(top_builddir)/parser/gapi-fixup.exe;${EPREFIX}/usr/bin/gapi2-fixup;"				\
-		-e "s;\$(RUNTIME) \$(top_builddir)/generator/gapi_codegen.exe;${EPREFIX}/usr/bin/gapi2-codegen;"			\
+		-e "s; \$(srcdir)/../glib/glib-api.xml; $(get_sharp_apis --bare glib-sharp-3.0);"			\
+		-e "s; ../pango/pango-api.xml; $(get_sharp_apis --bare pango-sharp-3.0);"				\
+		-e "s; ../atk/atk-api.xml; $(get_sharp_apis --bare atk-sharp-3.0);"					\
+		-e "s; ../gdk/gdk-api.xml; $(get_sharp_apis --bare gdk-sharp-3.0);"					\
+		-e "s; ../gtk/gtk-api.xml; $(get_sharp_apis --bare gtk-sharp-3.0);"					\
+		-e "s; \.\./glib/glib-sharp.dll; $(get_sharp_assemblies --bare glib-sharp-3.0);g"			\
+		-e "s; \.\./pango/pango-sharp.dll; $(get_sharp_assemblies --bare pango-sharp-3.0);g"			\
+		-e "s; \.\./atk/atk-sharp.dll; $(get_sharp_assemblies --bare atk-sharp-3.0);g"				\
+		-e "s; \.\./gdk/gdk-sharp.dll; $(get_sharp_assemblies --bare gdk-sharp-3.0);g"				\
+		-e "s; \.\./gtk/gtk-sharp.dll; $(get_sharp_assemblies --bare gtk-sharp-3.0);g"				\
+		-e "s;\$(RUNTIME) \$(top_builddir)/parser/gapi-fixup.exe;${EPREFIX}/usr/bin/gapi3-fixup;"				\
+		-e "s;\$(RUNTIME) \$(top_builddir)/generator/gapi_codegen.exe;${EPREFIX}/usr/bin/gapi3-codegen;"			\
 		-e "s:\$(SYMBOLS) \$(top_builddir)/parser/gapi-fixup.exe:\$(SYMBOLS):"					\
 		-e "s:\$(INCLUDE_API) \$(top_builddir)/generator/gapi_codegen.exe:\$(INCLUDE_API):"			\
 		$(find . -name Makefile.in) || die "failed to fix ${TARBALL}-tarball makefiles"
@@ -444,15 +446,15 @@ gtk-sharp-tarball-post_src_prepare() {
 # Runs a M-m-m-monster sed on GTK_SHARP_MODULE_DIR to convert references to
 # local assemblies to the installed ones. Is only called by src_prepare when
 # $GTK_SHARP_MODULE is a member of $gnome_sharp_module_list.
-gnome-sharp-tarball-post_src_prepare() {
+gnome-sharp3-tarball-post_src_prepare() {
 	cd "${S}/${GTK_SHARP_MODULE_DIR}"
 	sed -i	\
-		-e "s; ../gnomevfs/gnome-vfs-api.xml; $(get_sharp_apis --bare gnome-vfs-sharp-2.0);"			\
-		-e "s; ../art/art-api.xml; $(get_sharp_apis --bare art-sharp-2.0);"					\
-		-e "s; \.\./art/art-sharp.dll; $(get_sharp_assemblies --bare art-sharp-2.0);g"				\
-		-e "s; \.\./gnomevfs/gnome-vfs-sharp.dll; $(get_sharp_assemblies --bare gnome-vfs-sharp-2.0);g"		\
-		-e "s;/r:\$(top_builddir)/art/art-sharp.dll;$(get_sharp_assemblies --prefixed art-sharp-2.0);"		\
-		-e "s;/r:\$(top_builddir)/gnome/gnome-sharp.dll;$(get_sharp_assemblies --prefixed gnome-sharp-2.0);"	\
+		-e "s; ../gnomevfs/gnome-vfs-api.xml; $(get_sharp_apis --bare gnome-vfs-sharp-3.0);"			\
+		-e "s; ../art/art-api.xml; $(get_sharp_apis --bare art-sharp-3.0);"					\
+		-e "s; \.\./art/art-sharp.dll; $(get_sharp_assemblies --bare art-sharp-3.0);g"				\
+		-e "s; \.\./gnomevfs/gnome-vfs-sharp.dll; $(get_sharp_assemblies --bare gnome-vfs-sharp-3.0);g"		\
+		-e "s;/r:\$(top_builddir)/art/art-sharp.dll;$(get_sharp_assemblies --prefixed art-sharp-3.0);"		\
+		-e "s;/r:\$(top_builddir)/gnome/gnome-sharp.dll;$(get_sharp_assemblies --prefixed gnome-sharp-3.0);"	\
 		$(find . -name Makefile.in) || die "failed to fix ${TARBALL}-tarball makefiles"
 }
 
@@ -463,7 +465,7 @@ gnome-sharp-tarball-post_src_prepare() {
 # Contains a phase_hook, runs very last.
 # phase_hook prefix trigger: ${TARBALL}-tarball-post
 # Is exported.
-gtk-sharp-module_src_prepare() {
+gtk-sharp3-module_src_prepare() {
 	base_src_prepare
 # @ECLASS-VARIABLE: EAUTORECONF
 # @DESCRIPTION:
@@ -479,13 +481,13 @@ gtk-sharp-module_src_prepare() {
 # for each ebuild be only its own dependencies, without patching configure.
 # Is only called by gtk-sharp-module_src_configure when $GTK_SHARP_MODULE
 # is a member of $gtk_sharp_module_list.
-gtk-sharp-tarball_src_configure() {
-	pkg_check_modules_override GLIB gobject-2.0
-	pkg_check_modules_override GIO gio-2.0
+gtk-sharp3-tarball_src_configure() {
+	pkg_check_modules_override GLIB gobject-3.0
+	pkg_check_modules_override GIO gio-3.0
 	pkg_check_modules_override PANGO pango
 	pkg_check_modules_override ATK atk
-	pkg_check_modules_override GTK gtk+-2.0
-	pkg_check_modules_override GLADE libglade-2.0
+	pkg_check_modules_override GTK gtk+-3.0
+	pkg_check_modules_override GLADE libglade-3.0
 }
 
 # @FUNCTION: gnome-sharp-tarball_src_configure
@@ -494,13 +496,13 @@ gtk-sharp-tarball_src_configure() {
 # for each ebuild be only its own dependencies. Without patching configure.
 # Is only called by gtk-sharp-module_src_configure when $GTK_SHARP_MODULE
 # is a member of $gnome_sharp_module_list.
-gnome-sharp-tarball_src_configure() {
+gnome-sharp3-tarball_src_configure() {
 	has "${EAPI:-0}" 2 && ! use prefix && EPREFIX=
-	pkg_check_modules_override GLADESHARP glade-sharp-2.0
-	pkg_check_modules_override GAPI gapi-2.0
-	ac_path_prog_override GAPI_PARSER "${EPREFIX}"/usr/bin/gapi2-parser
-	ac_path_prog_override GAPI_CODEGEN "${EPREFIX}"/usr/bin/gapi2-codegen
-	ac_path_prog_override GAPI_FIXUP "${EPREFIX}"/usr/bin/gapi2-fixup
+	pkg_check_modules_override GLADESHARP glade-sharp-3.0
+	pkg_check_modules_override GAPI gapi-3.0
+	ac_path_prog_override GAPI_PARSER "${EPREFIX}"/usr/bin/gapi3-parser
+	ac_path_prog_override GAPI_CODEGEN "${EPREFIX}"/usr/bin/gapi3-codegen
+	ac_path_prog_override GAPI_FIXUP "${EPREFIX}"/usr/bin/gapi3-fixup
 }
 
 # @FUNCTION: gtk-sharp-module_src_configure
@@ -510,7 +512,7 @@ gnome-sharp-tarball_src_configure() {
 # Contains a phase_hook, run before econf.
 # phase_hook prefix trigger: ${TARBALL}-tarball
 # Is exported.
-gtk-sharp-module_src_configure() {
+gtk-sharp3-module_src_configure() {
 	phase_hook ${TARBALL}-tarball
 	econf	--disable-static \
 		--disable-dependency-tracking \
@@ -525,7 +527,7 @@ gtk-sharp-module_src_configure() {
 # Sets CSC=/usr/bin/gmcs. Deletes top_srcdir Makefiles to prevent recursing in
 # case we missed some dll references.
 # Is exported.
-gtk-sharp-module_src_compile() {
+gtk-sharp3-module_src_compile() {
 	rm -f "${S}"/Makefile* &> /dev/null
 	cd "${S}/${GTK_SHARP_MODULE_DIR}"
 	emake CSC=/usr/bin/gmcs || die "emake failed"
@@ -536,7 +538,7 @@ gtk-sharp-module_src_compile() {
 # Installs the module. Fixes up lib paths so they're multilib-safe.
 # Gets rid of .la files.
 # Is exported.
-gtk-sharp-module_src_install() {
+gtk-sharp3-module_src_install() {
 	cd "${S}/${GTK_SHARP_MODULE_DIR}"
 	emake DESTDIR="${D}" install || die "emake install failed"
 	mono_multilib_comply
