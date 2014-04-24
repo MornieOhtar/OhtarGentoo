@@ -140,7 +140,14 @@ case ${PF} in
 		add_depend ">=dev-lang/mono-2.0"
 		;;
 	gtk-sharp-gapi*)
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		case ${PVR} in
+			2.99.*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
+			;;
+			*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+			;;
+		esac
 		add_depend "dev-perl/XML-LibXML"
 		;;
 	gtk-sharp-*)
@@ -155,23 +162,51 @@ case ${PF} in
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
 		add_depend "x11-libs/gtk+:2"
 		add_depend "~dev-dotnet/pango-sharp-${PV}"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		case ${PVR} in
+			2.99.*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
+			;;
+			*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+			;;
+		esac
 		;;
 	atk-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
 		add_depend "dev-libs/atk"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		case ${PVR} in
+			2.99.*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
+			;;
+			*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+			;;
+		esac
 		;;
 	glib-sharp-*)
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		case ${PVR} in
+			2.99.*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
+			;;
+			*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+			;;
+		esac
 		add_depend "dev-libs/glib:2"
 		;;
 	pango-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
 		add_depend "x11-libs/pango"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		case ${PVR} in
+			2.99.*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
+			;;
+			*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+			;;
+		esac
 		;;
 	gtk-dotnet-*)
 		add_depend "~dev-dotnet/glib-sharp-${PV}"
@@ -179,7 +214,14 @@ case ${PF} in
 		add_depend "~dev-dotnet/pango-sharp-${PV}"
 		add_depend "~dev-dotnet/gtk-sharp-${PV}"
 		add_depend "dev-lang/mono[-minimal]"
-		add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+		case ${PVR} in
+			2.99.*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.99.1:3"
+			;;
+			*)
+				add_rdepend "!<=dev-dotnet/gtk-sharp-2.12.7:2"
+			;;
+		esac
 		;;
 	glade-sharp-*)
 		add_bdepend "~dev-dotnet/gtk-sharp-gapi-${PV}"
@@ -275,8 +317,16 @@ S="${WORKDIR}/${TARBALL}-${PV}"
 # @ECLASS-VARIABLE: SRC_URI
 # @DESCRIPTION:
 # Default value: mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.bz2
-SRC_URI="${SRC_URI}
-	mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.bz2"
+case ${PVR} in
+	2.99.*)
+		SRC_URI="${SRC_URI}
+			mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.xz"
+		;;
+	*)
+		SRC_URI="${SRC_URI}
+			mirror://gnome/sources/${TARBALL}/${PV_MAJOR}/${TARBALL}-${PV}.tar.bz2"
+		;;
+esac
 
 # @FUNCTION: get_sharp_apis
 # @USAGE: <type> <pkgconfig-package>
