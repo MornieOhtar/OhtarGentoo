@@ -18,10 +18,10 @@ IUSE="+aac +cdda +bpm daap doc +encode ipod karma mtp test udev -web youtube +gn
 
 #	media-plugins/gst-plugins-gio:0.10
 #	media-plugins/gst-plugins-gconf:0.10
-#	udev?
-#		dev-dotnet/gtk-sharp-beans
-#	>=dev-dotnet/notify-sharp-0.4.0_pre20080912-r1
-#	>=dev-dotnet/gconf-sharp-2.24.0:2
+#	!gtk3? (
+#		>=dev-dotnet/notify-sharp-0.4.0_pre20080912-r1
+#		>=dev-dotnet/gconf-sharp-2.24.0:2
+#	)
 
 RDEPEND="
 	>=dev-lang/mono-3
@@ -42,7 +42,7 @@ RDEPEND="
 			media-plugins/gst-plugins-cdio:1.0
 		)
 	)
-	media-libs/musicbrainz:3
+	media-libs/musicbrainz:5
 	dev-dotnet/dbus-sharp
 	dev-dotnet/dbus-sharp-glib
 	>=dev-dotnet/mono-addins-0.6.2[gtk]
@@ -73,7 +73,7 @@ RDEPEND="
 	)
 	udev? (
 		app-misc/media-player-info
-		>=dev-dotnet/gudev-sharp-3.0
+		dev-dotnet/gudev-sharp
 		dev-dotnet/gkeyfile-sharp
 	)
 "
