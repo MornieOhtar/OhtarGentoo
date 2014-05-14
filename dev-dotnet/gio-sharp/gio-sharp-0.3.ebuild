@@ -14,8 +14,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND=">=dev-dotnet/glib-sharp-2.12:2
-	>=dev-dotnet/gtk-sharp-gapi-2.12:2
+RDEPEND=">=dev-dotnet/glib-sharp-2.12
+	>=dev-dotnet/gtk-sharp-gapi-2.12
 	>=dev-libs/glib-2.22:2"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
