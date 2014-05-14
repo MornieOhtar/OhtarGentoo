@@ -10,26 +10,22 @@ HOMEPAGE="http://banshee.fm/"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86" 	# ~amd64 ~x86
-		# Fails...
+KEYWORDS="~amd64 ~x86"
 
 #switched web to - because I personally don't want to build yet another webkit-gtk
-IUSE="+aac +cdda +bpm daap doc +encode ipod karma mtp test udev -web youtube +gnome"
+IUSE="+aac +cdda +bpm daap doc +encode ipod karma mtp test udev -web youtube +gnome +external-notify-sharp"
 
 #	media-plugins/gst-plugins-gio:0.10
 #	media-plugins/gst-plugins-gconf:0.10
-#	!gtk3? (
-#		>=dev-dotnet/notify-sharp-0.4.0_pre20080912-r1
-#		>=dev-dotnet/gconf-sharp-2.24.0:2
-#	)
+#	>=dev-dotnet/gnome-sharp-2.12:2
 
 RDEPEND="
 	>=dev-lang/mono-3
 	gnome-base/gnome-settings-daemon
 	sys-apps/dbus
-	>=dev-dotnet/gnome-sharp-2.12:2
-	>=dev-dotnet/gtk-sharp-2.99.2:3
+	>=dev-dotnet/gtk-sharp-2.99.2
 	>=dev-dotnet/gstreamer-sharp-0.99
+	>=dev-dotnet/gconf-sharp-2.24.0
 	media-libs/gstreamer:1.0
 	media-libs/gst-plugins-base:1.0
 	media-libs/gst-plugins-bad:1.0
@@ -48,6 +44,7 @@ RDEPEND="
 	>=dev-dotnet/mono-addins-0.6.2[gtk]
 	>=dev-dotnet/taglib-sharp-2.0.3.7
 	>=dev-db/sqlite-3.4:3
+	external-notify-sharp? ( >=dev-dotnet/notify-sharp-0.4.0_pre20080912-r1 )
 	karma? ( >=media-libs/libkarma-0.1.0-r1 )
 	aac? ( media-plugins/gst-plugins-faad:1.0 )
 	bpm? ( media-plugins/gst-plugins-soundtouch:1.0 )
@@ -66,14 +63,14 @@ RDEPEND="
 	)
 	web? (
 		>=net-libs/webkit-gtk-1.2.2:2
-		>=net-libs/libsoup-gnome-2.26:2.4
+		>=net-libs/libsoup-gnome-2.42:2.4
 	)
 	youtube? (
 		>=dev-dotnet/google-gdata-sharp-1.4
 	)
 	udev? (
 		app-misc/media-player-info
-		dev-dotnet/gudev-sharp
+		>=dev-dotnet/gudev-sharp-3.0
 		dev-dotnet/gkeyfile-sharp
 	)
 "
@@ -97,6 +94,9 @@ src_prepare () {
 	eautoreconf
 }
 
+# Unknown feature
+#		--enable-gapless-playback
+
 src_configure() {
 	# soundmenu needs a properly maintained and updated indicate-sharp
 	local myconf="--disable-dependency-tracking
@@ -105,12 +105,11 @@ src_configure() {
 		--enable-schemas-install
 		--with-gconf-schema-file-dir=/etc/gconf/schemas
 		--with-vendor-build-id=Gentoo/${PN}/${PVR}
-		--enable-gapless-playback
 		--disable-boo
 		--disable-torrent
 		--disable-shave
-		--disable-ubuntuone
 		--disable-soundmenu
+		--disable-ubuntuone
 		--disable-upnp"
 	econf \
 		$(use_enable doc docs) \
