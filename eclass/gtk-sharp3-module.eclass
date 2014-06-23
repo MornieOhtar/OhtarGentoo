@@ -89,10 +89,19 @@ case ${GTK_SHARP_MODULE} in
 		TARBALL="gtk-sharp3"
 		TARBALL_SRC="gtk-sharp"
 		case ${PVR} in
-			2.99.2*)
+			2.99.2)
 				SRC_URI="http://andhor.com.ua/${TARBALL_SRC}-2.99.2.patch.bz2"
 				PATCHES=(
 					"${WORKDIR}/${TARBALL_SRC}-2.99.2.patch"
+				)
+				EAUTORECONF="YES"
+				add_bdepend "=sys-devel/automake-1.13.3*"
+				add_bdepend ">=sys-devel/autoconf-2.61"
+			;;
+			2.99.3)
+				SRC_URI="http://andhor.com.ua/${TARBALL_SRC}-2.99.3.patch.bz2"
+				PATCHES=(
+					"${WORKDIR}/${TARBALL_SRC}-2.99.3.patch"
 				)
 				EAUTORECONF="YES"
 				add_bdepend "=sys-devel/automake-1.13.3*"
