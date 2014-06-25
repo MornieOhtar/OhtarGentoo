@@ -1,0 +1,25 @@
+# ChangeLog for games-roguelike/dwarf-fortress
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*dwarf-fortress-0.34.11 (05 Jun 2012)
+
+  05 Jun 2012; <vurdalak@gentoo.org> +dwarf-fortress-0.34.11.ebuild:
+  Version bump to 0.34.11
+
+*dwarf-fortress-0.34.10 (21 May 2012)
+
+  21 May 2012; <vurdalak@gentoo.org> +dwarf-fortress-0.34.10.ebuild:
+  Version bump
+
+*dwarf-fortress-0.34.09 (17 May 2012)
+
+  17 May 2012; <vurdalak@gentoo.org> +dwarf-fortress-0.34.09.ebuild:
+  Version bump
+
+*dwarf-fortress-0.34.07 (07 Apr 2012)
+
+  07 Apr 2012; <vurdalak@gentoo.org> +dwarf-fortress-0.34.07.ebuild,
+  +files/SConscript-gentoo, +files/dwarf-fortress-wrapper:
+  Added dwarf fortress latest.
+
